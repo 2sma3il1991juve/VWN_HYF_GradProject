@@ -153,7 +153,7 @@ class Add extends Component {
   }
 
   getStepContent(stepIndex) {
-    // const URLregex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-])\/?$/
+    const URLregex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
     const { formData, tags } = this.state
     switch (stepIndex) {
       case 0:
@@ -180,7 +180,7 @@ class Add extends Component {
                             value={formData.Logo}
                             type="url"
                             onChange={this.handleChange}
-                            validators={['required', 'isURL']}
+                            validators={['required', ]}
                             errorMessages={['this field is required', 'url is not valid']}
                         /><br />
                         <TextValidator
@@ -199,7 +199,7 @@ class Add extends Component {
                             type="url"
                             onChange={this.handleChange}
                             value={formData.Website}
-                            validators={['required', 'isURL']}
+                            validators={['required',]}
                             errorMessages={['this field is required', 'url is not valid']}
                         /><br />
                         <TextValidator
@@ -319,7 +319,7 @@ class Add extends Component {
                       <div style={{ marginTop: 24, marginBottom: 12 }}>
                       </div>
                     </div>
-                  );
+                  )
                 }
               })
               }
