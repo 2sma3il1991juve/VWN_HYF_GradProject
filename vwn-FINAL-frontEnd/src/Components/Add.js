@@ -46,7 +46,9 @@ class Add extends Component {
 
   handleChangeThirdStep = (event) => {
     const { formData } = this.state;
-    formData.selectedRegions[event.target.name] = event.target.value;
+    const region = event.target.id;
+    formData['selectedRegions'][region] = {}
+    formData['selectedRegions'][region][event.target.name] = event.target.value;
     this.setState({ formData });
   }
 
@@ -88,11 +90,11 @@ class Add extends Component {
     let toggle = true
     for (const tag in activeTags) {
       if (activeTags[tag]) {
-        formData["selectedTags"] = activeTags
+        formData['selectedTags'][tag] = tag
         this.setState({ formData })
         for (const region in activeRegions) {
           if (activeRegions[region]) {
-            formData["selectedRegions"]["regions"] = {activeRegions}
+            formData["selectedRegions"][region] = region
             this.setState({ formData })
             const { stepIndex } = this.state;
             if (stepIndex < 2) {
@@ -153,7 +155,7 @@ class Add extends Component {
   }
 
   getStepContent(stepIndex) {
-    // const URLregex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-])\/?$/
+    const URLregex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
     const { formData, tags } = this.state
     switch (stepIndex) {
       case 0:
@@ -163,7 +165,7 @@ class Add extends Component {
             onSubmit={this.handleNext}
             onError={errors => console.log(errors)}
           >
-            <TextValidator
+            {/* <TextValidator
                             name="Name"
                             floatingLabelText="Name"
                             floatingLabelFixed={true}
@@ -171,7 +173,7 @@ class Add extends Component {
                             type="text"
                             onChange={this.handleChange}
                             validators={['required']}
-                            errorMessages={['this field is required']}
+                            errorMessages={['this field is required', 'please type a valid name']}
                         /><br />
                         <TextValidator
                             name="Logo"
@@ -180,7 +182,7 @@ class Add extends Component {
                             value={formData.Logo}
                             type="url"
                             onChange={this.handleChange}
-                            validators={['required', 'isURL']}
+                            validators={['required', ]}
                             errorMessages={['this field is required', 'url is not valid']}
                         /><br />
                         <TextValidator
@@ -199,7 +201,7 @@ class Add extends Component {
                             type="url"
                             onChange={this.handleChange}
                             value={formData.Website}
-                            validators={['required', 'isURL']}
+                            validators={['required',]}
                             errorMessages={['this field is required', 'url is not valid']}
                         /><br />
                         <TextValidator
@@ -212,7 +214,7 @@ class Add extends Component {
                             value={formData.Description}
                             validators={['required']}
                             errorMessages={['this field is required']}
-                        /><br />
+                        /><br /> */}
             <div style={{ marginTop: 24, marginBottom: 12 }}>
               <FlatButton
                 label="Back"
@@ -290,9 +292,9 @@ class Add extends Component {
                         floatingLabelFixed={true}
                         type="Text"
                         onChange={this.handleChangeThirdStep}
-                        // value={formData.Phone}
+                        value={formData.selectedRegions[region][`Phone${region}`]}
                         validators={['required']}
-                        errorMessages={['this field is required']}
+                        errorMessages={['this field is required', 'please type a valid name']}
                       /><br />
                       <TextValidator
                         name={`PostCode${region}`}
@@ -301,9 +303,9 @@ class Add extends Component {
                         floatingLabelFixed={true}
                         type="Text"
                         onChange={this.handleChangeThirdStep}
-                        // value={formData.PostCode}
+                        value={formData.selectedRegions[region][`PostCode${region}`]}
                         validators={['required',]}
-                        errorMessages={['this field is required',]}
+                        errorMessages={['this field is required', 'please type a valid name']}
                       /><br />
                       <TextValidator
                         name={`HouseNumber${region}`}
@@ -312,14 +314,14 @@ class Add extends Component {
                         floatingLabelFixed={true}
                         type="Text"
                         onChange={this.handleChangeThirdStep}
-                        // value={formData["selectedRegion"]["region"]}
+                        value={formData.selectedRegions[region][`HouseNumber${region}`]}
                         validators={['required',]}
-                        errorMessages={['this field is required']}
+                        errorMessages={['this field is required', 'please type a valid name']}
                       /><br />
                       <div style={{ marginTop: 24, marginBottom: 12 }}>
                       </div>
                     </div>
-                  );
+                  )
                 }
               })
               }
