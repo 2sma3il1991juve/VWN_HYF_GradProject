@@ -46,6 +46,7 @@ class Add extends Component {
 
   handleChangeThirdStep = (event) => {
     const { formData } = this.state;
+<<<<<<< HEAD
     const regions = formData.selectedRegions
     for (const region in regions){
       let name = event.target.name
@@ -61,6 +62,11 @@ class Add extends Component {
         }
     }
     // console.log("fff",formData)
+=======
+    const region = event.target.id;
+    formData['selectedRegions'][region] = {}
+    formData['selectedRegions'][region][event.target.name] = event.target.value;
+>>>>>>> master
     this.setState({ formData });
   }
 
@@ -102,10 +108,19 @@ class Add extends Component {
     let toggle = true
     for (const tag in activeTags) {
       if (activeTags[tag]) {
+<<<<<<< HEAD
         formData.selectedTags[tag] = tag
         for (const region in activeRegions) {
           if (activeRegions[region]) {
             formData.selectedRegions[region] = {}
+=======
+        formData['selectedTags'][tag] = tag
+        this.setState({ formData })
+        for (const region in activeRegions) {
+          if (activeRegions[region]) {
+            formData["selectedRegions"][region] = region
+            this.setState({ formData })
+>>>>>>> master
             const { stepIndex } = this.state;
             if (stepIndex < 2) {
               this.setState({ stepIndex: stepIndex + 1 });
@@ -178,7 +193,7 @@ class Add extends Component {
             onSubmit={this.handleNext}
             onError={errors => console.log(errors)}
           >
-            <TextValidator
+            {/* <TextValidator
                             name="Name"
                             floatingLabelText="Name"
                             floatingLabelFixed={true}
@@ -227,7 +242,7 @@ class Add extends Component {
                             value={formData.Description}
                             validators={['required']}
                             errorMessages={['this field is required']}
-                        /><br />
+                        /><br /> */}
             <div style={{ marginTop: 24, marginBottom: 12 }}>
               <FlatButton
                 label="Back"
@@ -306,7 +321,11 @@ class Add extends Component {
                         floatingLabelFixed={true}
                         type="Text"
                         onChange={this.handleChangeThirdStep}
+<<<<<<< HEAD
                         value={formData.selectedRegions[region]["Phone"]}
+=======
+                        value={formData.selectedRegions[region][`Phone${region}`]}
+>>>>>>> master
                         validators={['required']}
                         errorMessages={['this field is required', 'please type a valid name']}
                       /><br />
@@ -317,7 +336,11 @@ class Add extends Component {
                         floatingLabelFixed={true}
                         type="Text"
                         onChange={this.handleChangeThirdStep}
+<<<<<<< HEAD
                         value={formData.selectedRegions[region]["PostCode"]}
+=======
+                        value={formData.selectedRegions[region][`PostCode${region}`]}
+>>>>>>> master
                         validators={['required',]}
                         errorMessages={['this field is required', 'please type a valid name']}
                       /><br />
@@ -328,7 +351,11 @@ class Add extends Component {
                         floatingLabelFixed={true}
                         type="Text"
                         onChange={this.handleChangeThirdStep}
+<<<<<<< HEAD
                         value={formData.selectedRegions[region]["HouseNumber"]}
+=======
+                        value={formData.selectedRegions[region][`HouseNumber${region}`]}
+>>>>>>> master
                         validators={['required',]}
                         errorMessages={['this field is required', 'please type a valid name']}
                       /><br />

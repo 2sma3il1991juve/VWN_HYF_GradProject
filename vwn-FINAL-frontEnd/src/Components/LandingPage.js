@@ -47,8 +47,7 @@ class LandingPage extends Component {
                 breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
                 cols={{ lg: 3, md: 3, sm: 3, xs: 3, xxs: 3 }}
                 autoSize={true}
-                verticalCompact={false}
-                compactType='horizontal'
+                compactType ='horizontal'
                 preventCollision={true}
             >
                 {Object.keys(data).map((org) => {
